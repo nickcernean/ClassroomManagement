@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { Grid, Pagination } from "@mui/material";
 import CharacterCard from "@/components/CharacterCard";
-import { Characters } from "@/types/character.types";
+import { CharactersModule } from "@/types/character.types";
 
 type CharacterListProps = {
-  characters: Array<Characters.Character>;
+  characters: Array<CharactersModule.Character>;
   currentPage: number;
   pageSize: number;
   totalCharacters: number;

@@ -1,7 +1,10 @@
 import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,37 +15,12 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { ClassroomModule } from "@/types/classroom.types";
 
-function createData(
-  className: string,
-  teacherName: string,
-  roomNumber: number,
-  startTime: string
-) {
-  return {
-    className,
-    teacherName,
-    roomNumber,
-    startTime,
-    history: [
-      {
-        date: "2020-01-05",
-        customerId: "11091700",
-        amount: 3,
-      },
-      {
-        date: "2020-01-02",
-        customerId: "Anonymous",
-        amount: 1,
-      },
-    ],
-  };
-}
-
-function Row(props: { row: ReturnType<typeof createData> }) {
+function Row(props: { row: ClassroomModule.Classroom }) {
   const { row } = props;
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = useState(false);
+  console.log(row);
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -56,36 +34,53 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.className}
+          {row.class}
         </TableCell>
-        <TableCell align="right">{row.teacherName}</TableCell>
+        <TableCell align="right">{row.teacher}</TableCell>
         <TableCell align="right">{row.roomNumber}</TableCell>
         <TableCell align="right">{row.startTime}</TableCell>
+        <TableCell align="right">
+          <IconButton aria-label="delete" color="primary">
+            <EditIcon />
+          </IconButton>
+        </TableCell>
+        <TableCell align="right">
+          <IconButton aria-label="delete" color="error">
+            <DeleteIcon />
+          </IconButton>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Students
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
                     <TableCell>Student Id</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell align="right">Rank</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell align="center">Gender</TableCell>
+                    <TableCell align="center">Rank</TableCell>
+                    <TableCell align="right">Remove</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                  {row.students.map((studentRow) => (
+                    <TableRow key={studentRow.id}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {studentRow.id}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
+                      <TableCell>{studentRow.name}</TableCell>
+                      <TableCell align="center">female</TableCell>
+                      <TableCell align="center">{studentRow.rank}</TableCell>
+                      <TableCell align="right">
+                        <IconButton aria-label="delete" color="error">
+                          <DeleteIcon />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -98,13 +93,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-const rows = [
-  createData("Physics", "Jack London", 6, "15:30"),
-  createData("Math", "Winston Curchil", 9, "11:45"),
-  createData("Chemistry", "Winston Curchil", 16.0, "11:30"),
-];
+type ClassroomTableProps = {
+  classrooms: ClassroomModule.Classroom[];
+};
 
-export default function ClassRoomTable() {
+export default function ClassRoomTable({ classrooms }: ClassroomTableProps) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -115,11 +108,13 @@ export default function ClassRoomTable() {
             <TableCell align="right">Teacher</TableCell>
             <TableCell align="right">Room Number</TableCell>
             <TableCell align="right">Start Time</TableCell>
+            <TableCell align="right">Edit</TableCell>
+            <TableCell align="right">Remove</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
+          {classrooms.map((classroom) => (
+            <Row key={classroom.id} row={classroom} />
           ))}
         </TableBody>
       </Table>

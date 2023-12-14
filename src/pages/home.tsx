@@ -5,7 +5,10 @@ import { Button, Box } from "@mui/material";
 import ClassRoomTable from "@/components/Table/ClassroomTable";
 import CustomImage from "@/components/Image/CustomImage";
 import CustomModal from "@/components/Modal/CustomModal";
-export default function Home() {
+import { ClassroomModule } from "@/types/classroom.types";
+import classroomApiHandler from "./api/classrooms";
+
+export default function Home({ classrooms }: any) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,20 +26,34 @@ export default function Home() {
         <Button
           onClick={handleOpen}
           variant="contained"
-          color="primary"
+          color="success"
           style={{
-            position: "absolute",
+            position: "relative",
             top: 0,
+            left: 10,
             right: 0,
-            margin: "8px",
+            fontSize: 17,
+            margin: "10px",
             zIndex: 1,
           }}
         >
           Create
         </Button>
-        <ClassRoomTable />
+        <ClassRoomTable classrooms={classrooms} />
       </Box>
       <CustomModal onOpen={handleOpen} onClose={handleClose} open={open} />
     </ApplicationLayout>
   );
+}
+
+import fsPromises from "fs/promises";
+import path from "path";
+export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), "/data/classrooms.json");
+  const jsonData = await fsPromises.readFile(filePath, "utf-8");
+  const classrooms = JSON.parse(jsonData);
+
+  return {
+    props: { classrooms },
+  };
 }
