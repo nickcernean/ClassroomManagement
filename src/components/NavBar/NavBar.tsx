@@ -13,7 +13,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CustomImage from "../Image/CustomImage";
-import Link from 'next/link';
+import Link from "next/link";
 
 interface Props {
   window?: () => Window;
@@ -43,16 +43,18 @@ export default function DrawerAppBar({ window }: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText
-                sx={{
-                  color: "common.black",
-                  fontSize: 34,
-                  fontWeight: "medium",
-                }}
-                primary={item}
-              />
-            </ListItemButton>
+            <Link key={item} href={`/${item.toLowerCase()}`} passHref>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText
+                  sx={{
+                    color: "common.black",
+                    fontSize: 34,
+                    fontWeight: "medium",
+                  }}
+                  primary={item}
+                />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>
