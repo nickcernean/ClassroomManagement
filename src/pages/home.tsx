@@ -1,14 +1,14 @@
+import { useState } from "react";
 import ApplicationLayout from "@/components/Layout/ApplicationLayout/ApplicationLayout";
 import ApplicationConfig from "@/components/Layout/ApplicationConfig";
-import { Button, Box, Typography, Modal, Backdrop, Fade } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import ClassRoomTable from "@/components/Table/ClassroomTable";
-import fetcher from "./api/fetcher";
 import CustomImage from "@/components/Image/CustomImage";
-import { useState } from "react";
-
-
+import CustomModal from "@/components/Modal/CustomModal";
 export default function Home() {
-
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <ApplicationLayout
       meta={<ApplicationConfig title="Home" description="Home Page" />}
@@ -21,6 +21,7 @@ export default function Home() {
       />
       <Box position="relative">
         <Button
+          onClick={handleOpen}
           variant="contained"
           color="primary"
           style={{
@@ -35,8 +36,7 @@ export default function Home() {
         </Button>
         <ClassRoomTable />
       </Box>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
-
+      <CustomModal onOpen={handleOpen} onClose={handleClose} open={open} />
     </ApplicationLayout>
   );
 }

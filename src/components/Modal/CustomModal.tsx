@@ -1,6 +1,4 @@
-// CustomModal.js
-import React, { forwardRef, useState, useContext } from "react";
-("use client");
+"use client";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
@@ -9,21 +7,18 @@ import Backdrop from "@mui/material/Backdrop";
 import { CustomModalStyles } from "./CustomModal.styles";
 
 interface CustomModalProps {
-  onOpen?: () => void;
+  onOpen: () => void;
+  onClose: () => void;
+  open: boolean;
 }
 
-
-const CustomModal = ({ onOpen }: CustomModalProps) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+const CustomModal = ({ onOpen, onClose, open }: CustomModalProps) => {
   return (
     <Modal
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={open}
-      onClose={handleClose}
+      onClose={onClose}
       closeAfterTransition
       slots={{ backdrop: Backdrop }}
       slotProps={{
