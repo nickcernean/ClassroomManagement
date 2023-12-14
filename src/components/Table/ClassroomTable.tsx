@@ -16,11 +16,15 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { ClassroomModule } from "@/types/classroom.types";
+import { deleteClassroom } from "@/util/service.util";
 
 function Row(props: { row: ClassroomModule.Classroom }) {
   const { row } = props;
   const [open, setOpen] = useState(false);
-  console.log(row);
+  const handleDeleteClick = (id: number) => deleteClassroom(id);
+  const handleEditClick = (id: ClassroomModule.Classroom) =>
+    console.log("edit clicked");
+
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -40,18 +44,27 @@ function Row(props: { row: ClassroomModule.Classroom }) {
         <TableCell align="right">{row.roomNumber}</TableCell>
         <TableCell align="right">{row.startTime}</TableCell>
         <TableCell align="right">
-          <IconButton aria-label="delete" color="primary">
+          <IconButton
+            aria-label="delete"
+            color="primary"
+            onClick={() => handleEditClick(row)}
+          >
             <EditIcon />
           </IconButton>
         </TableCell>
         <TableCell align="right">
-          <IconButton aria-label="delete" color="error">
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            color="error"
+            onClick={() => handleDeleteClick(row.id)}
+          >
             <DeleteIcon />
           </IconButton>
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
@@ -64,7 +77,6 @@ function Row(props: { row: ClassroomModule.Classroom }) {
                     <TableCell>Name</TableCell>
                     <TableCell align="center">Gender</TableCell>
                     <TableCell align="center">Rank</TableCell>
-                    <TableCell align="right">Remove</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -76,11 +88,6 @@ function Row(props: { row: ClassroomModule.Classroom }) {
                       <TableCell>{studentRow.name}</TableCell>
                       <TableCell align="center">female</TableCell>
                       <TableCell align="center">{studentRow.rank}</TableCell>
-                      <TableCell align="right">
-                        <IconButton aria-label="delete" color="error">
-                          <DeleteIcon />
-                        </IconButton>
-                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -99,25 +106,27 @@ type ClassroomTableProps = {
 
 export default function ClassRoomTable({ classrooms }: ClassroomTableProps) {
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Class</TableCell>
-            <TableCell align="right">Teacher</TableCell>
-            <TableCell align="right">Room Number</TableCell>
-            <TableCell align="right">Start Time</TableCell>
-            <TableCell align="right">Edit</TableCell>
-            <TableCell align="right">Remove</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {classrooms.map((classroom) => (
-            <Row key={classroom.id} row={classroom} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>Class</TableCell>
+              <TableCell align="right">Teacher</TableCell>
+              <TableCell align="right">Room Number</TableCell>
+              <TableCell align="right">Start Time</TableCell>
+              <TableCell align="right">Edit</TableCell>
+              <TableCell align="right">Remove</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {classrooms.map((classroom) => (
+              <Row key={classroom.id} row={classroom} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

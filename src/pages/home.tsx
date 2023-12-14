@@ -5,8 +5,7 @@ import { Button, Box } from "@mui/material";
 import ClassRoomTable from "@/components/Table/ClassroomTable";
 import CustomImage from "@/components/Image/CustomImage";
 import CustomModal from "@/components/Modal/CustomModal";
-import { ClassroomModule } from "@/types/classroom.types";
-import classroomApiHandler from "./api/classrooms";
+import { getAllClassrooms } from "@/util/service.util";
 
 export default function Home({ classrooms }: any) {
   const [open, setOpen] = useState(false);
@@ -46,13 +45,8 @@ export default function Home({ classrooms }: any) {
   );
 }
 
-import fsPromises from "fs/promises";
-import path from "path";
-export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), "/data/classrooms.json");
-  const jsonData = await fsPromises.readFile(filePath, "utf-8");
-  const classrooms = JSON.parse(jsonData);
-
+export async function getServerSideProps() {
+  const classrooms = await getAllClassrooms();
   return {
     props: { classrooms },
   };
