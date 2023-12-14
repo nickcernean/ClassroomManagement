@@ -13,6 +13,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CustomImage from "../Image/CustomImage";
+import Link from 'next/link';
 
 interface Props {
   window?: () => Window;
@@ -97,16 +98,18 @@ export default function DrawerAppBar({ window }: Props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item, index) => (
-              <Button
-                key={item}
-                sx={{
-                  color: "common.black",
-                  fontSize: 17,
-                  marginRight: index < navItems.length - 1 ? 2 : 0,
-                }}
-              >
-                {item}
-              </Button>
+              <Link key={item} href={`/${item.toLowerCase()}`} passHref>
+                <Button
+                  key={item}
+                  sx={{
+                    color: "common.black",
+                    fontSize: 17,
+                    marginRight: index < navItems.length - 1 ? 2 : 0,
+                  }}
+                >
+                  {item}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>
