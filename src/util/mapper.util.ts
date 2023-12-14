@@ -1,10 +1,10 @@
-import { Characters } from "@/types";
+import { CharactersModule } from "@/types";
 
 class Mappers {
-    static mapToCharacterObject<T extends Characters.Character>(source: T): Characters.Character {
+    static mapToCharacterObject<T extends CharactersModule.Character>(source: T): CharactersModule.Character {
         const { id, name, images } = source;
 
-        const mappedObject: Characters.Character = {
+        const mappedObject: CharactersModule.Character = {
             id,
             name,
             images,

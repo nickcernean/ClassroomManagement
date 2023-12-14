@@ -1,4 +1,4 @@
-export declare module Characters {
+export declare module CharactersModule {
 
     type GetCharacterResponse = {
         characters: Array<Character>;
@@ -9,6 +9,7 @@ export declare module Characters {
     export type Character = {
         id: number;
         name: string;
+        rank?: string;
         images: string[];
     }
 }
