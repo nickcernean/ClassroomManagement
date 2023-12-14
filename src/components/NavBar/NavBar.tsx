@@ -2,10 +2,8 @@ import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,6 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import CustomImage from "../Image/CustomImage";
 
 interface Props {
   window?: () => Window;
@@ -32,7 +31,12 @@ export default function DrawerAppBar({ window }: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        <MenuBookIcon />
+        <CustomImage
+          className="mx-auto"
+          src="/red_square.png"
+          variant="icon"
+          alt="logo"
+        />
       </Typography>
 
       <List>
@@ -41,7 +45,7 @@ export default function DrawerAppBar({ window }: Props) {
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText
                 sx={{
-                  color: "text.primary",
+                  color: "common.black",
                   fontSize: 34,
                   fontWeight: "medium",
                 }}
@@ -65,8 +69,8 @@ export default function DrawerAppBar({ window }: Props) {
           sx={{
             backgroundColor: (theme) =>
               theme.palette.mode === "light"
-                ? theme.palette.grey[400]
-                : theme.palette.grey[800],
+                ? theme.palette.secondary.light
+                : theme.palette.grey[400],
             p: 1,
           }}
         >
@@ -82,13 +86,25 @@ export default function DrawerAppBar({ window }: Props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{ flexGrow: 0.1, display: { xs: "none", sm: "block" } }}
           >
-            <MenuBookIcon />
+            <CustomImage
+              className="mx-auto"
+              src="/red_square.png"
+              variant="icon"
+              alt="logo"
+            />
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
+            {navItems.map((item, index) => (
+              <Button
+                key={item}
+                sx={{
+                  color: "common.black",
+                  fontSize: 17,
+                  marginRight: index < navItems.length - 1 ? 2 : 0,
+                }}
+              >
                 {item}
               </Button>
             ))}

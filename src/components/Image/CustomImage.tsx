@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-type Variant = "mobile" | "small" | "medium" | "large" | "extra-large";
+type Variant = "mobile" | "small" | "medium" | "large" | "extra-large" | "icon";
 
 interface Props {
   variant: Variant;
@@ -12,6 +12,7 @@ interface Props {
 
 const imageSizes: Record<Variant, { width: number; height: number }> = {
   mobile: { width: 120, height: 100 },
+  icon: { width: 50, height: 50 },
   small: { width: 170, height: 130 },
   medium: { width: 230, height: 190 },
   large: { width: 300, height: 280 },

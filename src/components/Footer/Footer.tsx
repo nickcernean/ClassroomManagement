@@ -13,32 +13,32 @@ export default function Footer() {
       sx={{
         backgroundColor: (theme) =>
           theme.palette.mode === "light"
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
+            ? theme.palette.secondary.dark
+            : theme.palette.grey[400],
         p: 4,
       }}
     >
       <Container maxWidth="xl">
         <Grid container justifyContent="space-between" spacing={5}>
           <Grid item  xs={12} sm={4}>
-            <Typography variant="h6" color="text.primary" gutterBottom>
+            <Typography variant="h6" color="common.white" gutterBottom>
               About Me
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="common.white">
               I am Nicolae, a dedicated software engineer, willing to learn new technologies.
             </Typography>
           </Grid>
           
           <Grid item justifyContent="flex-end" xs={12} sm={4}>
-            <Typography variant="h6" color="text.primary" gutterBottom>
+            <Typography variant="h6" color="common.white" gutterBottom>
               Follow Me
             </Typography>
-            <Link href="https://github.com/nickcernean" color="inherit">
+            <Link href="https://github.com/nickcernean" color="common.white">
               <GitHub />
             </Link>
             <Link
               href="https://www.linkedin.com/in/nicolae-cernean/"
-              color="inherit"
+              color="common.white"
               sx={{ pl: 1, pr: 1 }}
             >
               <LinkedIn />
