@@ -20,7 +20,11 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ["Home", "Teachers", "Students"];
+const navItems = [
+  { name: "Home", route: "/" },
+  { name: "Teachers", route: "teachers" },
+  { name: "Students", route: "/students" },
+];
 
 export default function DrawerAppBar({ window }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -41,9 +45,9 @@ export default function DrawerAppBar({ window }: Props) {
       </Typography>
 
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <Link key={item} href={`/${item.toLowerCase()}`} passHref>
+        {navItems.map((item, index) => (
+          <ListItem key={index} disablePadding>
+            <Link href={`/${item.route}`} passHref>
               <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText
                   sx={{
@@ -51,7 +55,7 @@ export default function DrawerAppBar({ window }: Props) {
                     fontSize: 34,
                     fontWeight: "medium",
                   }}
-                  primary={item}
+                  primary={item.name}
                 />
               </ListItemButton>
             </Link>
@@ -100,16 +104,15 @@ export default function DrawerAppBar({ window }: Props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item, index) => (
-              <Link key={item} href={`/${item.toLowerCase()}`} passHref>
+              <Link key={index} href={`/${item.route}`} passHref>
                 <Button
-                  key={item}
                   sx={{
                     color: "common.black",
                     fontSize: 17,
                     marginRight: index < navItems.length - 1 ? 2 : 0,
                   }}
                 >
-                  {item}
+                  {item.name}
                 </Button>
               </Link>
             ))}
