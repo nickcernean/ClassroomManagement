@@ -9,6 +9,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -22,8 +23,7 @@ interface Props {
 const drawerWidth = 240;
 const navItems = [
   { name: "Home", route: "/" },
-  { name: "Teachers", route: "teachers" },
-  { name: "Students", route: "/students" },
+  { name: "Students", route: "students" },
 ];
 
 export default function DrawerAppBar({ window }: Props) {
@@ -36,12 +36,7 @@ export default function DrawerAppBar({ window }: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        <CustomImage
-          className="mx-auto"
-          src="/red_square.png"
-          variant="icon"
-          alt="logo"
-        />
+        <MenuBookIcon sx={{ fontSize: 50}} />
       </Typography>
 
       <List>
@@ -76,7 +71,7 @@ export default function DrawerAppBar({ window }: Props) {
           sx={{
             backgroundColor: (theme) =>
               theme.palette.mode === "light"
-                ? theme.palette.secondary.light
+                ? theme.palette.secondary.dark
                 : theme.palette.grey[400],
             p: 1,
           }}
@@ -95,19 +90,14 @@ export default function DrawerAppBar({ window }: Props) {
             component="div"
             sx={{ flexGrow: 0.1, display: { xs: "none", sm: "block" } }}
           >
-            <CustomImage
-              className="mx-auto"
-              src="/red_square.png"
-              variant="icon"
-              alt="logo"
-            />
+            <MenuBookIcon sx={{ fontSize: 50}} />
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item, index) => (
               <Link key={index} href={`/${item.route}`} passHref>
                 <Button
                   sx={{
-                    color: "common.black",
+                    color: "common.white",
                     fontSize: 17,
                     marginRight: index < navItems.length - 1 ? 2 : 0,
                   }}

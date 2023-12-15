@@ -1,10 +1,14 @@
 "use client";
-import Modal from "@mui/material/Modal";
+import Dialog from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Backdrop from "@mui/material/Backdrop";
 import { CustomModalStyles } from "./CustomModal.styles";
+import { ClassroomModule } from "@/types/classroom.types";
+import CustomForm from "@/components/Form";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material";
 
 interface CustomModalProps {
   onOpen: () => void;
@@ -14,7 +18,7 @@ interface CustomModalProps {
 
 const CustomModal = ({ onOpen, onClose, open }: CustomModalProps) => {
   return (
-    <Modal
+    <Dialog
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={open}
@@ -29,15 +33,10 @@ const CustomModal = ({ onOpen, onClose, open }: CustomModalProps) => {
     >
       <Fade in={open}>
         <Box sx={CustomModalStyles}>
-          <Typography id="transition-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <CustomForm />
         </Box>
       </Fade>
-    </Modal>
+    </Dialog>
   );
 };
 

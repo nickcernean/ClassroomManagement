@@ -12,7 +12,7 @@ type IApplicationProps = {
 const ApplicationLayout = (props: IApplicationProps) => (
   <div className="w-full antialiased ">
     {props.meta}
-    <div className="xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm mb:max-w-screen-sm xl:mx-auto lg:mx-auto md:mx-auto sm:mx-auto mb:mx-3">
+    <div className="xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm mb:max-w-screen-sm xl:mx-auto lg:mx-auto md:mx-auto sm:mx-auto">
       <NavBar />
       <main className="content my-2">{props.children}</main>
       <Footer />
