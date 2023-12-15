@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { Grid, Pagination } from "@mui/material";
+import { Grid, Pagination, Box } from "@mui/material";
 import CharacterCard from "@/components/CharacterCard";
 import { CharactersModule } from "@/types/character.types";
 
@@ -39,22 +39,25 @@ const CharacterList = ({
   }, [page]);
 
   return (
-    <Grid container justifyContent="center" spacing={2}>
-      {characters.map((character) => (
-        <Grid item key={character.id} xs={12} sm={6} md={4} lg={3} my={3}>
-          <CharacterCard
-            id={character.id}
-            photoUrl={character.images[0]}
-            name={character.name}
-          />
-        </Grid>
-      ))}
-
-      <Pagination
-        page={page}
-        count={totalPages.current}
-        onChange={handleChange}
-      />
+    <Grid container justifyContent="center">
+      <Grid container justifyContent="center" spacing={2}>
+        {characters.map((character) => (
+          <Grid item key={character.id} xs={12} sm={6} md={4} lg={3} my={3}>
+            <CharacterCard
+              id={character.id}
+              photoUrl={character.images[0]}
+              name={character.name}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Box>
+        <Pagination
+          page={page}
+          count={totalPages.current}
+          onChange={handleChange}
+        />
+      </Box>
     </Grid>
   );
 };
