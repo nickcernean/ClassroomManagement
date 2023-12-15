@@ -1,4 +1,6 @@
-import { CharactersModule } from ".";
+import { Dayjs } from "dayjs";
+import { StudentModule } from "./student.type";
+import { TeacherModule } from "./teacher.type";
 export declare module ClassroomModule {
 
     export type GetClassroomResponse = {
@@ -7,9 +9,9 @@ export declare module ClassroomModule {
     export type Classroom = {
         id: number;
         class: string;
-        teacher: string;
+        teachers: TeacherModule.Teacher[];
         roomNumber: number;
-        startTime: string;
-        students: CharactersModule.Character[];
+        startTime: Dayjs;
+        students: StudentModule.Student[];
     }
 }

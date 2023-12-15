@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ClassroomModule } from '@/types/classroom.types';
 import fsPromises from 'fs/promises';
 import path from 'path'
-import { deleteClassroom } from "@/util/service.util";
 
 const dataFilePath = path.join(process.cwd(), 'data/classrooms.json');
 
