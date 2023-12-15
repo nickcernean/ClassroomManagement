@@ -2,8 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ClassroomModule } from '@/types/classroom.types';
 import fsPromises from 'fs/promises';
 import path from 'path'
+import { TeacherModule } from '@/types/teacher.type';
+import { StudentModule } from '@/types/student.type';
 
 const dataFilePath = path.join(process.cwd(), 'data/classrooms.json');
+const studentsDataFilePath = path.join(process.cwd(), 'data/students.json');
+const teachersDataFilePath = path.join(process.cwd(), 'data/teachers.json');
 
 export default async function apiHandler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -84,13 +88,32 @@ const patch = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const post = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { classroom } = req.body;
+    const classroomRequest = JSON.parse(req.body) as ClassroomModule.CreateClassRoomRequest;
 
     const jsonData = await fsPromises.readFile(dataFilePath, 'utf8');
     const classRooms: ClassroomModule.Classroom[] = JSON.parse(jsonData);
 
-    classroom.id = classRooms.length ? Math.max(...classRooms.map(x => x.id)) + 1 : 1;
-    classRooms.push(classroom);
+    const jsonStudentsData = await fsPromises.readFile(studentsDataFilePath, 'utf8');
+    let students: StudentModule.Student[] = JSON.parse(jsonStudentsData);
+
+    const jsonTeachersData = await fsPromises.readFile(teachersDataFilePath, 'utf8');
+    let teachers: TeacherModule.Teacher[] = JSON.parse(jsonTeachersData);
+
+    // @ts-ignore
+    const studentsToAdd = students.filter((student) => classroomRequest.students.includes(student.id));
+    const teachersToAdd = teachers.filter((teacher) => teacher.id === Number(classroomRequest.teacher));
+
+
+    const newClassRoom: ClassroomModule.Classroom = {
+        id: classRooms.length ? Math.max(...classRooms.map(x => x.id)) + 1 : 1,
+        class: classroomRequest.class,
+        roomNumber: classroomRequest.roomNumber,
+        startTime: classroomRequest.startTime,
+        teachers: teachersToAdd,
+        students: studentsToAdd
+    };
+
+    classRooms.push(newClassRoom);
 
     const updatedData = JSON.stringify(classRooms, null, 2);
     await fsPromises.writeFile(dataFilePath, updatedData);

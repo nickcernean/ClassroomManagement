@@ -34,6 +34,18 @@ export async function getAllStudents() {
     return students;
 }
 
+export async function createClassRoom(classroom: ClassroomModule.CreateClassRoomRequest) {
+    console.log(classroom);
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/classrooms`,
+        {
+            method: "POST",
+            body: JSON.stringify(classroom),
+        }
+    );
+    const classrooms = await response.json();
+    return classrooms;
+}
 
 export async function updateClassroom(classroom: ClassroomModule.Classroom) {
     const response = await fetch(

@@ -1,5 +1,5 @@
 [
-{
+  {
     "id": 1,
     "class": "Mathematics",
     "teachers": [
@@ -91,6 +91,66 @@
         "label": "Isabella Jones",
         "id": 509,
         "rank": 19,
+        "gender": "Male"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "class": "rtrddrt",
+    "roomNumber": 100,
+    "startTime": "2021-10-10T09:00:00.000Z",
+    "teachers": [
+      {
+        "label": "Jack Miller",
+        "id": 798
+      }
+    ],
+    "students": [
+      {
+        "label": "Sophia Miller",
+        "id": 139,
+        "rank": 3,
+        "gender": "Female"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "class": "Nicolae Cernean",
+    "roomNumber": 100,
+    "startTime": "2021-10-10T12:00:00.000Z",
+    "teachers": [
+      {
+        "label": "Frank Moore",
+        "id": 39
+      }
+    ],
+    "students": [
+      {
+        "label": "Mia Davis",
+        "id": 997,
+        "rank": 91,
+        "gender": "Female"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "class": "Nicolae",
+    "roomNumber": 100,
+    "startTime": "2021-10-10T09:00:00.000Z",
+    "teachers": [
+      {
+        "label": "Grace Brown",
+        "id": 296
+      }
+    ],
+    "students": [
+      {
+        "label": "Isabella Wilson",
+        "id": 634,
+        "rank": 23,
         "gender": "Male"
       }
     ]

@@ -12,28 +12,32 @@ import * as yup from "yup";
 import { TimeSelector } from "@/components/Form/perequisites/TimeSelector";
 import dayjs, { Dayjs } from "dayjs";
 import { AutocompleteSelector } from "@/components/Form/perequisites/AutoCompleteSelector";
-import { getAllStudents, getAllTeachers } from "@/util/service.util";
+import {
+  createClassRoom,
+  getAllStudents,
+  getAllTeachers,
+} from "@/util/service.util";
 import { StudentModule } from "@/types/student.type";
 import { TeacherModule } from "@/types/teacher.type";
 import { ClassroomModule } from "@/types/classroom.types";
-
+import { useRouter } from "next/router";
 const validationSchema = yup.object().shape({
-  classroomName: yup.string().required("A classroom name is required"),
-  classroomNumber: yup.number().required("A classroom number is required"),
-  startsFrom: yup.date().required("A start time is required"),
+  class: yup.string().required("A classroom name is required"),
+  roomNumber: yup.number().required("A classroom number is required"),
+  startTime: yup.date().required("A start time is required"),
   teacher: yup.string().required("A teacher is required"),
   students: yup
     .array()
     .min(1, "At least one student is required")
     .max(40, "No more than 40 students are allowed")
     .required("At least one student is required"),
-  description: yup.string().required("A description is required"),
 });
 
 export default function Create(props: {
   students: StudentModule.Student[];
   teachers: TeacherModule.Teacher[];
 }) {
+  const router = useRouter();
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 }`}
@@ -41,28 +45,56 @@ export default function Create(props: {
       <Container maxWidth="md">
         <Box mb={3} p={2}>
           <Typography align="center">
-            Submit the form with empty fields to view validation errors.
+            Submit the details of the classroom you want to create
           </Typography>
         </Box>
         <Formik
-          initialValues={{} as ClassroomModule.Classroom}
+          initialValues={
+            {
+              class: "",
+              roomNumber: 100,
+              teacher: "",
+              students: [],
+              startTime: dayjs("2021-10-10T09:00:00.000Z"),
+            } as ClassroomModule.CreateClassRoomRequest
+          }
           validationSchema={validationSchema}
-          onSubmit={(
-            values: ClassroomModule.Classroom,
-            formikHelpers: FormikHelpers<ClassroomModule.Classroom>
+          onSubmit={async (
+            values: ClassroomModule.CreateClassRoomRequest,
+            formikHelpers: FormikHelpers<ClassroomModule.CreateClassRoomRequest>
           ) => {
-            alert(JSON.stringify(values, null, 2));
+            try {
+              const createClasRoomRequest: ClassroomModule.CreateClassRoomRequest =
+                {
+                  class: values.class,
+                  roomNumber: values.roomNumber,
+                  teacher: values.teacher,
+                  startTime: values.startTime,
+                  students: values.students,
+                };
+              const res = await createClassRoom(createClasRoomRequest);
+              router.push('/');
+            } catch (error) {
+              console.log(error);
+            }
             formikHelpers.setSubmitting(false);
           }}
         >
-          {(formikProps: FormikProps<ClassroomModule.Classroom>) => (
+          {(
+            formikProps: FormikProps<ClassroomModule.CreateClassRoomRequest>
+          ) => (
             <Form noValidate autoComplete="off">
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Divider variant="fullWidth" />
 
                   <Typography variant="subtitle1" fontWeight={"bold"} mt={2}>
-                    Classroom details
+                    {/* Classroom details
+                    {formikProps.errors && (
+                      <Typography color='error'>
+                        {JSON.stringify(formikProps.errors, null, 2)}
+                      </Typography>
+                    )} */}
                   </Typography>
                 </Grid>
               </Grid>
@@ -70,7 +102,7 @@ export default function Create(props: {
               <Grid container spacing={2} mt={0}>
                 <Grid item xl={6} md={4} xs={12}>
                   <Field
-                    name="classroomName"
+                    name="class"
                     label="Name"
                     size="normal"
                     fullWidth
@@ -80,7 +112,7 @@ export default function Create(props: {
 
                 <Grid item xl={3} md={4} xs={12}>
                   <Field
-                    name="classroomNumber"
+                    name="roomNumber"
                     label="Number"
                     type="number"
                     size="normal"
@@ -91,7 +123,7 @@ export default function Create(props: {
 
                 <Grid item xl={3} md={4} xs={12}>
                   <Field
-                    name="startsFrom"
+                    name="startTime"
                     label="Starts at"
                     size="normal"
                     fullWidth

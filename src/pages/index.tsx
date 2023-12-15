@@ -24,7 +24,7 @@ export default function Home({ classrooms }: any) {
         <Grid item xs={12} style={{ marginTop: "auto" }}>
           <Link href="/create" color="common.white">
             <Button
-              variant="contained"
+              variant='text'
               color="primary"
               style={{
                 color: "black",

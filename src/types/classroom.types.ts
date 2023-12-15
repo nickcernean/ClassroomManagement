@@ -14,4 +14,11 @@ export declare module ClassroomModule {
         startTime: Dayjs;
         students: StudentModule.Student[];
     }
+    export type CreateClassRoomRequest = {
+        class: string;
+        teacher: string
+        roomNumber: number;
+        startTime: Dayjs;
+        students: string[];
+    }
 }
