@@ -3,11 +3,11 @@ import { FieldProps, getIn } from "formik";
 import TextField from "@mui/material/TextField";
 import Autocomplete, { AutocompleteValue } from "@mui/material/Autocomplete";
 import { UseAutocompleteProps } from "@mui/material";
-import { Option } from "@/components/Form/Form";
+import { TeacherModule } from "@/types/teacher.type";
 
 export const AutocompleteSelector: React.FC<
   FieldProps &
-    UseAutocompleteProps<Option, true, true, false> & { label: string }
+    UseAutocompleteProps<TeacherModule.Teacher, true, true, false> & { label: string }
 > = (props) => {
   const isTouched = getIn(props.form.touched, props.field.name);
   const errorMessage = getIn(props.form.errors, props.field.name);
