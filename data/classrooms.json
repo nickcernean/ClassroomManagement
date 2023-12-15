@@ -1,84 +1,98 @@
 [
-    {
-      "id": 1,
-      "class": "Mathematics",
-      "teacher": "Mr. Smith",
-      "roomNumber": 101,
-      "startTime": "09:00 AM",
-      "students": [
-        {
-          "id": 101,
-          "name": "Alice",
-          "rank": "A+",
-          "images": ["alice_image1.jpg", "alice_image2.jpg"]
-        },
-        {
-          "id": 102,
-          "name": "Bob",
-          "rank": "B",
-          "images": ["bob_image1.jpg", "bob_image2.jpg"]
-        },
-        {
-          "id": 103,
-          "name": "Charlie",
-          "rank": "A",
-          "images": ["charlie_image1.jpg", "charlie_image2.jpg"]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "class": "History",
-      "teacher": "Ms. Johnson",
-      "roomNumber": 202,
-      "startTime": "10:30 AM",
-      "students": [
-        {
-          "id": 201,
-          "name": "David",
-          "rank": "B+",
-          "images": ["david_image1.jpg", "david_image2.jpg"]
-        },
-        {
-          "id": 202,
-          "name": "Eva",
-          "rank": "A",
-          "images": ["eva_image1.jpg", "eva_image2.jpg"]
-        },
-        {
-          "id": 203,
-          "name": "Frank",
-          "rank": "C",
-          "images": ["frank_image1.jpg", "frank_image2.jpg"]
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "class": "Science",
-      "teacher": "Dr. Anderson",
-      "roomNumber": 303,
-      "startTime": "01:00 PM",
-      "students": [
-        {
-          "id": 301,
-          "name": "Grace",
-          "rank": "A",
-          "images": ["grace_image1.jpg", "grace_image2.jpg"]
-        },
-        {
-          "id": 302,
-          "name": "Henry",
-          "rank": "B",
-          "images": ["henry_image1.jpg", "henry_image2.jpg"]
-        },
-        {
-          "id": 303,
-          "name": "Ivy",
-          "rank": "A+",
-          "images": ["ivy_image1.jpg", "ivy_image2.jpg"]
-        }
-      ]
-    }
-  ]
-  
+  {
+    "id": 1,
+    "class": "Mathematics",
+    "teachers": [
+      {
+        "label": "Alice Taylor",
+        "id": 89
+      }
+    ],
+    "roomNumber": 101,
+    "startTime": "2024-01-03T07:00:00",
+    "students": [
+      {
+        "label": "Sophia Miller",
+        "id": 139,
+        "rank": 3,
+        "gender": "Female"
+      },
+      {
+        "label": "Isabella Jones",
+        "id": 509,
+        "rank": 19,
+        "gender": "Male"
+      },
+      {
+        "label": "Mia Johnson",
+        "id": 199,
+        "rank": 36,
+        "gender": "Female"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "class": "History",
+    "teachers": [
+      {
+        "label": "Grace Brown",
+        "id": 296
+      }
+    ],
+    "roomNumber": 202,
+    "startTime": "2024-01-03T07:00:00",
+    "students": [
+      {
+        "label": "Isabella Johnson",
+        "id": 293,
+        "rank": 36,
+        "gender": "Male"
+      },
+      {
+        "label": "Olivia Jones",
+        "id": 882,
+        "rank": 2,
+        "gender": "Male"
+      },
+      {
+        "label": "Noah Miller",
+        "id": 165,
+        "rank": 68,
+        "gender": "Male"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "class": "Science",
+    "teachers": [
+      {
+        "label": "Grace Brown",
+        "id": 296
+      }
+    ],
+    "roomNumber": 303,
+    "startTime": "2024-01-03T07:00:00",
+    "students": [
+      {
+        "label": "Mia Wilson",
+        "id": 357,
+        "rank": 69,
+        "gender": "Male"
+      },
+      {
+        "label": "Isabella Wilson",
+        "id": 634,
+        "rank": 23,
+        "gender": "Male"
+      },
+      {
+        "label": "Isabella Jones",
+        "id": 509,
+        "rank": 19,
+        "gender": "Male"
+      }
+    ]
+  }
+]
