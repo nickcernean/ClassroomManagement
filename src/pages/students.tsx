@@ -1,7 +1,6 @@
 import ApplicationLayout from "@/components/Layout/ApplicationLayout/ApplicationLayout";
 import ApplicationConfig from "@/components/Layout/ApplicationConfig";
 import fetcher from "./api/characters";
-import useSWR from "swr";
 import { CharactersModule } from "@/types/character.types";
 import Mappers from "@/util/mapper.util";
 import CharacterList from "@/components/List/CharacterList";

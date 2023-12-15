@@ -3,11 +3,9 @@ import ApplicationLayout from "@/components/Layout/ApplicationLayout/Application
 import ApplicationConfig from "@/components/Layout/ApplicationConfig";
 import { Button, Grid } from "@mui/material";
 import ClassRoomTable from "@/components/Table/ClassroomTable";
-import CustomImage from "@/components/Image/CustomImage";
 import CustomModal from "@/components/Modal/CustomModal";
 import { getAllClassrooms } from "@/util/service.util";
 import Link from "next/link";
-import { ClassroomModule } from "@/types/classroom.types";
 
 export default function Home({ classrooms }: any) {
   const [open, setOpen] = useState(false);

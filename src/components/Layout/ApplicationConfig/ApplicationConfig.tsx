@@ -16,8 +16,6 @@ const ApplicationConfig = (props: IApplicationConfigProps) => {
           content="width=device-width,initial-scale=1"
           key="viewport"
         />
-
-        {/* <link rel="icon" type="image/svg" href="/rogelya_favicon.svg" /> */}
       </Head>
 
   );

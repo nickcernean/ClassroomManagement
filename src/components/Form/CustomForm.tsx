@@ -10,27 +10,13 @@ import { Formik, FormikHelpers, FormikProps, Form, Field } from "formik";
 import { FormTextField } from "./perequisites/FormTextField";
 import * as yup from "yup";
 import { TimeSelector } from "./perequisites/TimeSelector";
-import dayjs, { Dayjs } from "dayjs";
 import { AutocompleteSelector } from "./perequisites/AutoCompleteSelector";
 import { ClassroomModule } from "@/types/classroom.types";
-
-import {
-  getAllStudents,
-  getAllTeachers,
-  updateClassroom,
-} from "@/util/service.util";
 import { TeacherModule } from "@/types/teacher.type";
+import { StudentModule } from "@/types/student.type";
 export interface Teacher {
   label: string;
   id: number;
-}
-
-interface FormValues {
-  classroomName: string;
-  classroomNumber: number;
-  startsFrom: Dayjs;
-  teacher: string;
-  students: string[];
 }
 
 const validationSchema = yup.object().shape({
@@ -45,16 +31,40 @@ const validationSchema = yup.object().shape({
     .required("At least one student is required"),
 });
 
-const teacherOptions: Option[] = [
-  { label: 'Adam Basah', id: '1' },
-  { label: 'Huilan Ivan', id: '2' },
-  { label: 'Tucikarasam Covaci', id: '3' },
+const teacherOptions: TeacherModule.Teacher[] = [
+  {
+    "label": "Grace Brown",
+    "id": 296
+  },
+  {
+    "label": "Ivy Wilson",
+    "id": 543
+  },
+  {
+    "label": "Jack Taylor",
+    "id": 757
+  },
 ];
 
-const studentOptions: Option[] = [
-  { label: 'Hucikibiri Baidir', id: '1' },
-  { label: 'Ciocoflova Moca', id: '2' },
-  { label: 'Bacalaca Caca', id: '3' },
+const studentOptions: StudentModule.Student[] = [
+  {
+    "label": "Isabella Wilson",
+    "id": 634,
+    "rank": "A+",
+    "gender": "Male"
+  },
+  {
+    "label": "Mia Davis",
+    "id": 997,
+    "rank": "A-",
+    "gender": "Female"
+  },
+  {
+    "label": "Isabella Jones",
+    "id": 509,
+    "rank": "B",
+    "gender": "Male"
+  },
 ];
 
 const CustomForm = async () => {

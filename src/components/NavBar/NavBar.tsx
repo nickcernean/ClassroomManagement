@@ -13,7 +13,6 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import CustomImage from "../Image/CustomImage";
 import Link from "next/link";
 
 interface Props {
