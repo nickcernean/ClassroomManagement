@@ -7,7 +7,7 @@ import Mappers from "@/util/mapper.util";
 import CharacterList from "@/components/List/CharacterList";
 import { GetServerSidePropsContext } from "next";
 
-export default function Home(
+export default function Students(
   data: CharactersModule.GetCharacterResponse
 ) {
 
