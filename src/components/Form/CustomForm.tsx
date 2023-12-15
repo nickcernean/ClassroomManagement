@@ -58,25 +58,6 @@ const studentOptions: Option[] = [
 ];
 
 const CustomForm = async () => {
-  // const [studentsOptions, setStudentsOptions] = useState([]);
-  // const [teachersOptions, setTeachersOptions] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const studentsData = await getAllStudents();
-  //       const teachersData = await getAllTeachers();
-  //       console.log(studentsData)
-  //       setStudentsOptions(studentsData);
-  //       setTeachersOptions(teachersData);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   return (
     <Container maxWidth="md">
       <Box mb={3} p={2}>
@@ -92,7 +73,6 @@ const CustomForm = async () => {
           formikHelpers: FormikHelpers<ClassroomModule.Classroom>
         ) => {
           alert(JSON.stringify(values, null, 2));
-          console.log(values);
           formikHelpers.setSubmitting(false);
         }}
       >

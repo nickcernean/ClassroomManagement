@@ -1,14 +1,10 @@
-import * as React from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
+import { Box, Container, Grid, Typography, Link } from "@mui/material";
 import { GitHub, LinkedIn } from "@mui/icons-material";
-import { Box } from "@mui/material";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <Box
+      className="mt-screen"
       component="footer"
       sx={{
         backgroundColor: (theme) =>
@@ -20,15 +16,16 @@ export default function Footer() {
     >
       <Container maxWidth="xl">
         <Grid container justifyContent="space-between" spacing={5}>
-          <Grid item  xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Typography variant="h6" color="common.white" gutterBottom>
               About Me
             </Typography>
             <Typography variant="body2" color="common.white">
-              I am Nicolae, a dedicated software engineer, willing to learn new technologies.
+              I am Nicolae, a dedicated software engineer, willing to learn new
+              technologies.
             </Typography>
           </Grid>
-          
+
           <Grid item justifyContent="flex-end" xs={12} sm={4}>
             <Typography variant="h6" color="common.white" gutterBottom>
               Follow Me
@@ -48,4 +45,6 @@ export default function Footer() {
       </Container>
     </Box>
   );
-}
+};
+
+export default Footer;

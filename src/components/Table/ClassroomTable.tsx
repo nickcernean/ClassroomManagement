@@ -17,13 +17,14 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { ClassroomModule } from "@/types/classroom.types";
 import { deleteClassroom } from "@/util/service.util";
+import dayjs from "dayjs";
 
-function Row(props: { row: ClassroomModule.Classroom }) {
+function Row(props: {
+  row: ClassroomModule.Classroom;
+}) {
   const { row } = props;
   const [open, setOpen] = useState(false);
   const handleDeleteClick = (id: number) => deleteClassroom(id);
-  const handleEditClick = (id: ClassroomModule.Classroom) =>
-    console.log("edit clicked");
 
   return (
     <React.Fragment>
@@ -40,14 +41,16 @@ function Row(props: { row: ClassroomModule.Classroom }) {
         <TableCell component="th" scope="row">
           {row.class}
         </TableCell>
-        <TableCell align="right">{row.teacher}</TableCell>
+        <TableCell align="right">{row.teachers[0].label}</TableCell>
         <TableCell align="right">{row.roomNumber}</TableCell>
-        <TableCell align="right">{row.startTime}</TableCell>
+        <TableCell align="right">
+          {dayjs(row.startTime).format("HH:mm")}
+        </TableCell>
         <TableCell align="right">
           <IconButton
             aria-label="delete"
             color="primary"
-            onClick={() => handleEditClick(row)}
+            onClick={() => console.log('clicked')}
           >
             <EditIcon />
           </IconButton>
@@ -85,8 +88,8 @@ function Row(props: { row: ClassroomModule.Classroom }) {
                       <TableCell component="th" scope="row">
                         {studentRow.id}
                       </TableCell>
-                      <TableCell>{studentRow.name}</TableCell>
-                      <TableCell align="center">female</TableCell>
+                      <TableCell>{studentRow.label}</TableCell>
+                      <TableCell align="center">{studentRow.gender}</TableCell>
                       <TableCell align="center">{studentRow.rank}</TableCell>
                     </TableRow>
                   ))}
@@ -104,7 +107,9 @@ type ClassroomTableProps = {
   classrooms: ClassroomModule.Classroom[];
 };
 
-export default function ClassRoomTable({ classrooms }: ClassroomTableProps) {
+export default function ClassRoomTable({
+  classrooms,
+}: ClassroomTableProps) {
   return (
     <>
       <TableContainer component={Paper}>
